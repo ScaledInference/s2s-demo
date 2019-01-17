@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amp Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+</head>
+<body>
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Donate to Save the Bay Area Tree Octopus!
+            </h1>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <form id="form">
+        <div class="field is-horizontal">
+            Why you should donate:&nbsp<strong>{{.DonationIncentive}}</strong>.
+        </div>
+        <div class="field">
+            <label class="label">Donation Amount:</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="donation amount" value=0 name="amount">
+            </div>
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" id="submitServer" value="Donate (server reporting)" style="line-height: 30px; width: 300px; margin-bottom: 30px; border: 1px solid black;">
+        </div>
+    </form>
+</div>
+<script>
+
+    const formEle = document.getElementById('form');
+
+    const post = (endpoint, data, cb) => {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', function(event) {
+            cb(event.target.response);
+        });
+
+        xhr.addEventListener('error', function() {
+            alert('Oops! Something went wrong.');
+        });
+
+        xhr.open('POST', endpoint, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.send(JSON.stringify(data));
+    };
+
+    const getAmpTokenFromCookie = () => {
+        try {
+            const cookies = Cookies.get();
+            const { AmpToken: ampToken } = cookies;
+            return ampToken;
+        } catch (e) {
+            return null;
+        }
+    };
+
+
+    const REPORTING_SERVER_ENDPOINT = 'http://localhost:8090';
+
+    const submitDataServer = (e) => {
+        e.preventDefault();
+
+        const data = new FormData(formEle);
+        const properties= {};
+        for (const [key, value] of data.entries()) {
+            properties[key] = value;
+        }
+        const body = {
+            ampToken: getAmpTokenFromCookie(),
+            amount: properties['amount'],
+        };
+        post(REPORTING_SERVER_ENDPOINT, body, (res) => {
+            console.log(res)
+        });
+    };
+
+    document.getElementById('submitServer').addEventListener('click', submitDataServer, false);
+
+</script>
+</body>
+</html>

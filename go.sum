@@ -1,0 +1,6 @@
+github.com/ScaledInference/amp-go-thin v0.0.0-20181129000940-9550825bdc8c h1:aIiLgkElfh0w/QVBIE9ScHjSX8uy3iq5l998LwFbMJ4=
+github.com/ScaledInference/amp-go-thin v0.0.0-20181129000940-9550825bdc8c/go.mod h1:5gUEGXmKbc5WcAkfyY/VWhYBM6O+qpqlBlpt0Iy5QjU=
+github.com/mssola/user_agent v0.5.0 h1:gRF7/x8cKt8qzAosYGsBNyirta+F8fvYDlJrgXws9AQ=
+github.com/mssola/user_agent v0.5.0/go.mod h1:UFiKPVaShrJGW93n4uo8dpPdg1BSVpw2P9bneo0Mtp8=
+github.com/serialx/hashring v0.0.0-20180504054112-49a4782e9908 h1:RRpyb4kheanCQVyYfOhkZoD/cwClvn12RzHex2ZmHxw=
+github.com/serialx/hashring v0.0.0-20180504054112-49a4782e9908/go.mod h1:/yeG0My1xr/u+HZrFQ1tOQQQQrOawfyMUH13ai5brBc=
